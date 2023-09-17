@@ -1,5 +1,5 @@
 """
-Created on Saturday Sept 16 14:37:20 2018
+Created on Saturday Sept 16 14:37:20 2023
 
 @author: Srishti
 """
@@ -48,13 +48,15 @@ def derivatives_sigmoid(x):
 
 
 def main():
-    #((X, y), (x_valid, y_valid), _) = pickle.load(gzip.open('C:\\Users\\kkrishna\\mnist.pkl.gz', 'rb'), encoding='latin-1')
     np.random.seed(0)
     X, y = datasets.make_moons(200, noise=0.20)
+	 
+	#Normalized - preprocessing of input data
     mean = X.mean()
     std = X.std()
     X=(X-mean)/std
     
+	#Convert output data into NN output layer
     y = np.c_[ y, np.ones(200) ]
     rows = y.shape[0]
     for j in range(0, rows - 1):
@@ -63,13 +65,10 @@ def main():
         elif y[j,0] == 1:
             y[j,1] = 0 
 
-        
-    #x_valid = (x_valid-mean)/std
-
     #Variable initialization
     epoch=50000 #Setting training iterations
     lr=0.01 #Setting learning rate
-    inputlayer_neurons = 2#X.shape[1] #number of features in data set
+    inputlayer_neurons = 2 #X.shape[1] #number of features in data set
     hiddenlayer_neurons = 3 #number of hidden layers neurons
     output_neurons = 2 #number of neurons at output layer
     
